@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Selamat Ulang Tahun!</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #ffb6c1, #ffe4e1);
+      color: #333;
+    }
+    h1 {
+      margin-top: 40px;
+      font-size: 3em;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selamat Ulang Tahun, Sayang!</h1>
+  <p>Aku punya permainan kecil buat kamu. Klik tombol di bawah untuk mulai.</p>
+  <button id="startBtn">Mulai</button>
+
+  <script>
+    document.getElementById('startBtn').addEventListener('click', function () {
+      window.location.href = 'questions.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kejutan!</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      color: #333;
+    }
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5em;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      margin: 20px 0;
+    }
+    button {
+      padding: 8px 16px;
+      margin: 5px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kejutan!</h1>
+  <img src="https://via.placeholder.com/300x200?text=Love+You" alt="Gambar Cinta" />
+  <p>Kamu sayang sama siapa?</p>
+  <button id="youBtn">Kamu</button>
+  <button id="noBtn">Nggak mau bilang</button>
+
+  <script>
+    document.getElementById('youBtn').addEventListener('click', function () {
+      alert('Aku juga sayang banget sama kamu! 💖');
+    });
+    document.getElementById('noBtn').addEventListener('click', function () {
+      alert('Yakin? Yuk jawab yang jujur!');
+    });
+  </script>
+</body>
+</html>
