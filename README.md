@@ -2,4 +2,12 @@
 
 Website sederhana untuk kejutan ulang tahun dengan pertanyaan interaktif dan halaman kejutan.
 
-Buka `index.html` untuk memulai permainan.
+## Menjalankan
+
+Untuk melihat pratinjau secara lokal:
+
+```bash
+npm start
+```
+
+Atau cukup buka `index.html` di browser Anda.
