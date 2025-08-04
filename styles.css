@@ -1,7 +1,7 @@
 body {
   font-family: 'Arial', sans-serif;
   text-align: center;
-  background-color: #ffffff;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
   color: #333;
   display: flex;
   justify-content: center;
@@ -9,23 +9,42 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 20px;
+  animation: backgroundShift 10s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundShift {
+  0% { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%); }
+  100% { background: linear-gradient(135deg, #fecfef 0%, #ff9a9e 50%, #ff9a9e 100%); }
 }
 
 .container {
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 h1 {
   color: #ff69b4;
   font-size: 2rem;
   margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 p {
   font-size: 1rem;
   margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
 .question {
@@ -33,26 +52,137 @@ p {
 }
 
 button {
-  padding: 10px 20px;
-  margin: 5px;
+  padding: 12px 24px;
+  margin: 8px;
   font-size: 1rem;
   border: none;
-  border-radius: 8px;
-  background-color: #ff69b4;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
   color: #fff;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
 }
 
 button:hover {
-  background-color: #ff1493;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+  background: linear-gradient(45deg, #ff1493, #dc143c);
 }
 
 img {
   width: 100%;
   max-width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   margin: 20px 0;
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.5s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #ff69b4;
+}
+
+.modal h2 {
+  color: #ff69b4;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.modal p {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 15px 0;
+  color: #555;
+}
+
+.prayer-text {
+  background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 15px 0;
+  border-left: 4px solid #ff69b4;
+  font-style: italic;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.heart-animation {
+  display: inline-block;
+  animation: heartBeat 1.5s ease-in-out infinite;
+  color: #ff69b4;
+  font-size: 1.2em;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.celebration {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.balloon {
+  display: inline-block;
+  font-size: 2rem;
+  animation: float 3s ease-in-out infinite;
+  margin: 0 10px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
 @media (min-width: 600px) {
@@ -61,5 +191,9 @@ img {
   }
   p {
     font-size: 1.25rem;
+  }
+  .modal-content {
+    margin: 10% auto;
+    padding: 40px;
   }
 }

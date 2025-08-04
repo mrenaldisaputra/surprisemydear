@@ -1,22 +1,58 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selamat Ulang Tahun!</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>Selamat Ulang Tahun, Sayang!</h1>
-    <p>Aku punya permainan kecil buat kamu. Klik tombol di bawah untuk mulai.</p>
-    <button id="startBtn">Mulai</button>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Ulang Tahun Sayang!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="celebration">
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎂</span>
+        <span class="balloon">🎉</span>
+        <span class="balloon">🎊</span>
+        <span class="balloon">🎁</span>
+      </div>
 
-  <script>
-    document.getElementById('startBtn').addEventListener('click', function () {
-      window.location.href = 'questions.html';
-    });
-  </script>
-</body>
+      <h1>
+        Selamat Ulang Tahun, Sayang! <span class="heart-animation">💕</span>
+      </h1>
+
+      <div class="celebration">
+        <span class="balloon">🌹</span>
+        <span class="balloon">💖</span>
+        <span class="balloon">🌟</span>
+      </div>
+
+      <p>
+        <strong>Hari yang sangat istimewa telah tiba!</strong>
+        <span class="heart-animation">✨</span>
+      </p>
+      <p>
+        Aku sudah menyiapkan sesuatu yang spesial untukmu... Ada permainan kecil
+        dan kejutan yang akan membuatmu tersenyum!
+        <span class="heart-animation">😊</span>
+      </p>
+      <p>
+        <em>Siap untuk petualangan manis ini?</em>
+        <span class="heart-animation">💝</span>
+      </p>
+
+      <button id="startBtn">🎮 Mulai Petualangan</button>
+
+      <div style="margin-top: 30px; font-style: italic; color: #ff69b4">
+        <p>❝ Semoga hari ini menjadi hari yang tak terlupakan untukmu ❞</p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("startBtn")
+        .addEventListener("click", function () {
+          window.location.href = "questions.html";
+        });
+    </script>
+  </body>
 </html>

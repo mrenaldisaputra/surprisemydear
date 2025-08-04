@@ -1,27 +1,211 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kejutan!</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>Kejutan!</h1>
-    <img src="https://via.placeholder.com/300x200?text=Love+You" alt="Gambar Cinta" />
-    <p>Kamu sayang sama siapa?</p>
-    <button id="youBtn">Kamu</button>
-    <button id="noBtn">Nggak mau bilang</button>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kejutan Spesial!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="celebration">
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎂</span>
+        <span class="balloon">🎉</span>
+      </div>
 
-  <script>
-    document.getElementById('youBtn').addEventListener('click', function () {
-      alert('Aku juga sayang banget sama kamu! 💖');
-    });
-    document.getElementById('noBtn').addEventListener('click', function () {
-      alert('Yakin? Yuk jawab yang jujur!');
-    });
-  </script>
-</body>
+      <h1>Kejutan Spesial! <span class="heart-animation">💕</span></h1>
+
+      <img
+        src="https://via.placeholder.com/300x200/ff69b4/ffffff?text=Happy+Birthday+❤️"
+        alt="Happy Birthday"
+      />
+
+      <p>Hari yang sangat istimewa ini, aku ingin bertanya...</p>
+      <p>
+        <strong
+          >Kamu sayang sama siapa?
+          <span class="heart-animation">❤️</span></strong
+        >
+      </p>
+
+      <button id="youBtn">Kamu ❤️</button>
+      <button id="noBtn">Nggak mau bilang 😊</button>
+    </div>
+
+    <!-- Modal untuk Response Pertama -->
+    <div id="loveModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>
+          Aku juga sayang banget sama kamu!
+          <span class="heart-animation">💖</span>
+        </h2>
+
+        <div class="celebration">
+          <span class="balloon">🎊</span>
+          <span class="balloon">💝</span>
+          <span class="balloon">🌹</span>
+        </div>
+
+        <p>
+          Di hari ulang tahunmu yang istimewa ini, aku ingin memberikan doa-doa
+          terbaik untukmu...
+        </p>
+
+        <button id="showPrayersBtn">Lihat Doa Terbaik 🙏</button>
+      </div>
+    </div>
+
+    <!-- Modal untuk Doa-doa Terbaik -->
+    <div id="prayersModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Doa Terbaik Untukmu <span class="heart-animation">🙏</span></h2>
+
+        <div class="prayer-text">
+          <p>
+            <strong
+              >🌟 Semoga Allah SWT memberikan umur yang berkah, rezeki yang
+              halal dan melimpah, serta kesehatan yang selalu terjaga.</strong
+            >
+          </p>
+        </div>
+
+        <div class="prayer-text">
+          <p>
+            <strong
+              >💖 Semoga kamu selalu dikelilingi oleh orang-orang yang mencintai
+              dan menyayangimu dengan tulus.</strong
+            >
+          </p>
+        </div>
+
+        <div class="prayer-text">
+          <p>
+            <strong
+              >🌈 Semoga setiap langkahmu dimudahkan, setiap cita-citamu
+              tercapai, dan kebahagiaanmu tak pernah sirna.</strong
+            >
+          </p>
+        </div>
+
+        <div class="prayer-text">
+          <p>
+            <strong
+              >✨ Semoga Allah melindungimu dari segala hal buruk dan memberikan
+              yang terbaik di dunia dan akhirat.</strong
+            >
+          </p>
+        </div>
+
+        <div class="prayer-text">
+          <p>
+            <strong
+              >🌸 Semoga kamu selalu menjadi pribadi yang lebih baik dari hari
+              ke hari, dan menjadi kebanggaan keluarga.</strong
+            >
+          </p>
+        </div>
+
+        <div class="celebration">
+          <span class="balloon">🎂</span>
+          <span class="balloon">🎈</span>
+          <span class="balloon">🎊</span>
+        </div>
+
+        <p>
+          <strong
+            >Selamat Ulang Tahun Sayang!
+            <span class="heart-animation">🎉💕</span></strong
+          >
+        </p>
+        <p>
+          <em
+            >Semoga hari ini dan hari-hari berikutnya selalu dipenuhi
+            kebahagiaan!</em
+          >
+        </p>
+
+        <button id="backToHomeBtn">Kembali ke Beranda 🏠</button>
+      </div>
+    </div>
+
+    <!-- Modal untuk Response "Nggak mau bilang" -->
+    <div id="shyModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>
+          Ayolah... jangan malu-malu <span class="heart-animation">😊💕</span>
+        </h2>
+        <p>
+          Aku tahu jawabannya kok hihi...
+          <span class="heart-animation">😉</span>
+        </p>
+        <p>Yuk jawab yang jujur! Aku janji nggak akan marah kok!</p>
+        <button id="tryAgainBtn">Coba Lagi 💝</button>
+      </div>
+    </div>
+
+    <script>
+      // Get modal elements
+      const loveModal = document.getElementById("loveModal");
+      const prayersModal = document.getElementById("prayersModal");
+      const shyModal = document.getElementById("shyModal");
+
+      // Get button elements
+      const youBtn = document.getElementById("youBtn");
+      const noBtn = document.getElementById("noBtn");
+      const showPrayersBtn = document.getElementById("showPrayersBtn");
+      const tryAgainBtn = document.getElementById("tryAgainBtn");
+      const backToHomeBtn = document.getElementById("backToHomeBtn");
+
+      // Get close elements
+      const closeElements = document.querySelectorAll(".close");
+
+      // Event listeners
+      youBtn.addEventListener("click", function () {
+        loveModal.style.display = "block";
+      });
+
+      noBtn.addEventListener("click", function () {
+        shyModal.style.display = "block";
+      });
+
+      showPrayersBtn.addEventListener("click", function () {
+        loveModal.style.display = "none";
+        prayersModal.style.display = "block";
+      });
+
+      tryAgainBtn.addEventListener("click", function () {
+        shyModal.style.display = "none";
+      });
+
+      backToHomeBtn.addEventListener("click", function () {
+        window.location.href = "index.html";
+      });
+
+      // Close modal when clicking X
+      closeElements.forEach((closeBtn) => {
+        closeBtn.addEventListener("click", function () {
+          loveModal.style.display = "none";
+          prayersModal.style.display = "none";
+          shyModal.style.display = "none";
+        });
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener("click", function (event) {
+        if (event.target === loveModal) {
+          loveModal.style.display = "none";
+        }
+        if (event.target === prayersModal) {
+          prayersModal.style.display = "none";
+        }
+        if (event.target === shyModal) {
+          shyModal.style.display = "none";
+        }
+      });
+    </script>
+  </body>
 </html>
