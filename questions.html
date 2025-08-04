@@ -1,90 +1,361 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pertanyaan Seru</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="celebration">
-        <span class="balloon">🎯</span>
-        <span class="balloon">💭</span>
-        <span class="balloon">❓</span>
-      </div>
-
-      <h1>Pertanyaan Seru! <span class="heart-animation">🎮</span></h1>
-
-      <div id="question1" class="question">
-        <p>
-          <strong>Pertanyaan 1:</strong> Apa warna favoritmu?
-          <span class="heart-animation">🌈</span>
-        </p>
-        <button class="answer">🔴 Merah</button>
-        <button class="answer">🔵 Biru</button>
-        <button class="answer">🩷 Pink</button>
-      </div>
-
-      <div id="question2" class="question" style="display: none">
-        <p>
-          <strong>Pertanyaan 2:</strong> Kapan pertama kali kita bertemu?
-          <span class="heart-animation">💕</span>
-        </p>
-        <button class="answer">🏫 Di kampus</button>
-        <button class="answer">☕ Di kafe</button>
-        <button class="answer">🌳 Di taman</button>
-      </div>
-
-      <div id="finish" style="display: none">
-        <div class="celebration">
-          <span class="balloon">🎊</span>
-          <span class="balloon">🎉</span>
-          <span class="balloon">✨</span>
-        </div>
-        <p>
-          <strong>Wah, kamu hebat!</strong>
-          <span class="heart-animation">👏</span>
-        </p>
-        <p>Sekarang saatnya untuk kejutan yang sesungguhnya...</p>
-        <p>
-          <em>Siap untuk surprise spesial?</em>
-          <span class="heart-animation">💝</span>
-        </p>
-        <button id="surpriseBtn">🎁 Lihat Kejutan Spesial</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pertanyaan Seru</title>
+  <script src="audio-system.js"></script>
+  
+  <!-- Inline styles yang penting -->
+  <style>
+    body { font-family: Arial, sans-serif; background: linear-gradient(45deg, #ffe6f2, #fff0f5); min-height: 100vh; margin: 0; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; background-color: rgba(255,255,255,0.9); padding: 20px; border-radius: 20px; box-shadow: 0 5px 20px rgba(255,105,180,0.2); }
+    h1 { text-align: center; color: #ff69b4; }
+    .question { margin-bottom: 30px; }
+    .answer { display: block; width: 100%; margin: 10px 0; padding: 15px; background: linear-gradient(45deg, #ff69b4, #ff8da1); color: white; border: none; border-radius: 30px; font-size: 16px; cursor: pointer; transition: transform 0.2s; }
+    .answer:hover { transform: scale(1.02); }
+    .celebration { text-align: center; margin: 15px 0; }
+    .balloon { font-size: 28px; margin: 0 5px; display: inline-block; animation: float 2s infinite alternate; }
+    .heart-animation { display: inline-block; animation: pulse 1.5s infinite; }
+    
+    /* Multi-choice styling */
+    .multi-choice {
+      padding: 12px 16px;
+      background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+      color: #333;
+      border: 2px solid #ff69b4;
+      border-radius: 15px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 5px;
+    }
+    .multi-choice:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+    }
+    .multi-choice.selected {
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      color: white;
+      border-color: #ff1493;
+    }
+    .footer-credit {
+      text-align: center;
+      padding: 16px 0 8px 0;
+      font-size: 15px;
+      color: #ff69b4;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: rgba(255,255,255,0.2);
+      border-top: 2px solid #ffb6c1;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 99;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 -2px 10px rgba(255,105,180,0.08);
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
+  
+  <!-- Link stylesheet setelah inline styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="celebration">
+      <span class="balloon">🎯</span>
+      <span class="balloon">💭</span>
+      <span class="balloon">❓</span>
     </div>
 
-    <script>
-      const answers = document.querySelectorAll(".answer");
+    <!-- Pertanyaan 1 -->
+    <div id="question1" class="question">
+      <p>
+        <strong>Pertanyaan 1:</strong> Kapan pertama kali kita intens bertemu?
+        <span class="heart-animation">💕</span>
+      </p>
+      <button class="answer" data-answer="januari">🌟 Akhir Januari 2025</button>
+      <button class="answer" data-answer="februari">💕 Awal Februari 2025</button>
+      <button class="answer" data-answer="maret">🌸 Awal Maret 2025</button>
+    </div>
+
+    <!-- Pertanyaan 2 -->
+    <div id="question2" class="question" style="display: none">
+      <p>
+        <strong>Pertanyaan 2:</strong> Kira-kira Rey tu menurut kamu gimana?
+        <span class="heart-animation">🥰</span>
+      </p>
+      <p style="font-size: 14px; color: #ff69b4; margin-bottom: 20px;">
+        <em>Pilih semua yang sesuai ya~😉</em>
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 400px; margin: 0 auto;">
+        <button class="multi-choice" data-choice="baik">😇 Baik</button>
+        <button class="multi-choice" data-choice="ganteng">😍 Ganteng</button>
+        <button class="multi-choice" data-choice="gemes">🥺 Gemes</button>
+        <button class="multi-choice" data-choice="nyaman">😌 Bikin Nyaman</button>
+        <button class="multi-choice" data-choice="seneng">😊 Bikin Seneng</button>
+        <button class="multi-choice" data-choice="lucu">😆 Lucu</button>
+      </div>
+      <button class="answer" id="submitChoices" style="margin-top: 20px;">💕 Submit Pilihan</button>
+    </div>
+
+    <!-- Pertanyaan 3 -->
+    <div id="question3" class="question" style="display: none">
+      <p>
+        <strong>Pertanyaan 3:</strong> Kapan pertama kali ketemu Rey, diajak kemana?
+        <span class="heart-animation">🚗</span>
+      </p>
+      <div style="margin: 20px 0;">
+        <input type="text" id="freeAnswer" placeholder="Ceritain dong... diajak kemana?" style="width: 80%; padding: 12px; border: 2px solid #ff69b4; border-radius: 10px; font-size: 16px; outline: none;">
+      </div>
+      <button class="answer" id="submitAnswer">💕 Submit Jawaban</button>
+    </div>
+
+    <!-- Response & Countdown -->
+    <div id="responseMessage" class="question" style="display: none">
+      <div class="celebration">
+        <span class="balloon">😊</span>
+        <span class="balloon">💕</span>
+        <span class="balloon">🎉</span>
+      </div>
+      <p id="personalMessage" style="text-align: center; font-style: italic; color: #ff69b4;">
+        <!-- Message akan diisi oleh JavaScript -->
+      </p>
+      <div id="countdownDisplay" style="text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(45deg, #ffb6c1, #ffc0cb); border-radius: 15px;">
+        <h3 style="margin: 0; color: #d63384;">⏰ Sudah Bersama Selama:</h3>
+        <div id="countdown" style="font-size: 24px; font-weight: bold; color: #d63384; margin: 10px 0;">
+          <!-- Countdown akan diisi JavaScript -->
+        </div>
+      </div>
+      <button class="answer" id="continueBtn">✨ Lanjut ke Kejutan</button>
+    </div>
+  </div>
+
+  <footer class="footer-credit">
+    Website by Rey
+  </footer>
+
+  <script>
+    // Bungkus semua kode dalam DOMContentLoaded untuk memastikan halaman dimuat terlebih dahulu
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log("DOM fully loaded"); // Debugging line
+      
       let step = 1;
+      let selectedTime = '';
+      let selectedChoices = [];
 
-      answers.forEach((btn) =>
-        btn.addEventListener("click", function () {
-          // Add click animation
-          btn.style.transform = "scale(0.95)";
-          setTimeout(() => {
-            btn.style.transform = "scale(1)";
-          }, 150);
+      // Function untuk menghitung countdown dari 1 Februari 2025
+      function calculateTimeTogether() {
+        try {
+          const startDate = new Date('2025-02-01');
+          const currentDate = new Date();
+          const timeDiff = currentDate - startDate;
+          const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+          const months = Math.floor(days / 30);
+          const remainingDays = days % 30;
+          return {
+            totalDays: days,
+            months: months,
+            days: remainingDays,
+            hours: hours,
+            minutes: minutes
+          };
+        } catch (error) {
+          console.error("Error calculating time:", error);
+          return { totalDays: 0, months: 0, days: 0, hours: 0, minutes: 0 };
+        }
+      }
 
+      // Handle pertanyaan pertama
+      const answerButtons = document.querySelectorAll('[data-answer]');
+      console.log("Answer buttons found:", answerButtons.length); // Debugging
+      
+      answerButtons.forEach((btn) => {
+        btn.addEventListener('click', function() {
+          console.log("Button clicked:", this.getAttribute('data-answer')); // Debugging
+          
+          // Play click sound
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+          }
+          
+          selectedTime = this.getAttribute('data-answer');
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => { this.style.transform = "scale(1)"; }, 150);
           setTimeout(() => {
-            if (step === 1) {
-              document.getElementById("question1").style.display = "none";
-              document.getElementById("question2").style.display = "block";
-              step++;
-            } else if (step === 2) {
-              document.getElementById("question2").style.display = "none";
-              document.getElementById("finish").style.display = "block";
-            }
+            document.getElementById("question1").style.display = "none";
+            document.getElementById("question2").style.display = "block";
           }, 300);
-        })
-      );
+        });
+      });
 
-      document
-        .getElementById("surpriseBtn")
-        .addEventListener("click", function () {
+      // Handle multiple choice buttons
+      const multiButtons = document.querySelectorAll('.multi-choice');
+      console.log("Multi-choice buttons found:", multiButtons.length); // Debugging
+      
+      multiButtons.forEach((btn) => {
+        btn.addEventListener('click', function() {
+          const choice = this.getAttribute('data-choice');
+          console.log("Multi-choice clicked:", choice); // Debugging
+          
+          // Play click sound
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+          }
+          
+          if (this.classList.contains('selected')) {
+            this.classList.remove('selected');
+            selectedChoices = selectedChoices.filter(c => c !== choice);
+          } else {
+            this.classList.add('selected');
+            selectedChoices.push(choice);
+          }
+        });
+      });
+
+      // Handle submit choices
+      const submitChoicesBtn = document.getElementById('submitChoices');
+      if (submitChoicesBtn) {
+        submitChoicesBtn.addEventListener('click', function() {
+          console.log("Submit choices clicked. Selected:", selectedChoices.length); // Debugging
+          
+          // Play click sound
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+          }
+          
+          if (selectedChoices.length === 0) {
+            alert('Eh, masa Rey ga ada yang bagus? Pilih dong minimal 1! 😢');
+            return;
+          } else if (selectedChoices.length === 1) {
+            alert('Cuma itu aja? Masa iya Rey cuma segitu doang? Pilih lagi dong~ 😏');
+            return;
+          } else if (selectedChoices.length === 2) {
+            alert('Dikit amat! Rey kan lebih dari itu, pilih yang lain juga dong! 🥺');
+            return;
+          } else if (selectedChoices.length < 3) {
+            alert('Kurang nih! Rey kan emang keren! 😎');
+            return;
+          }
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => { this.style.transform = "scale(1)"; }, 150);
+          setTimeout(() => {
+            document.getElementById("question2").style.display = "none";
+            document.getElementById("question3").style.display = "block";
+          }, 300);
+        });
+      } else {
+        console.error("Submit choices button not found!"); // Error checking
+      }
+
+      // Handle pertanyaan ketiga (free text)
+      const submitAnswerBtn = document.getElementById('submitAnswer');
+      if (submitAnswerBtn) {
+        submitAnswerBtn.addEventListener('click', function() {
+          const freeAnswerInput = document.getElementById('freeAnswer');
+          if (!freeAnswerInput) {
+            console.error("Free answer input not found!"); // Error checking
+            return;
+          }
+          
+          const freeAnswer = freeAnswerInput.value.trim();
+          console.log("Submit answer clicked. Answer:", freeAnswer); // Debugging
+          
+          // Play heart sound
+          if (window.audioSystem) {
+            audioSystem.playHeartSound();
+          }
+          
+          if (freeAnswer === '') {
+            alert('Ayo dong, ceritain dulu! 😊');
+            return;
+          }
+          
+          try {
+            let timeMessage = '';
+            if (selectedTime === 'januari') {
+              timeMessage = `Wah benar! Akhir Januari ya~ `;
+            } else if (selectedTime === 'februari') {
+              timeMessage = `Tepat sekali! Awal Februari memang! `;
+            } else if (selectedTime === 'maret') {
+              timeMessage = `Hmm, hampir benar sih hihi~ `;
+            }
+            
+            const choiceTexts = {
+              baik: 'baik',
+              ganteng: 'ganteng',
+              gemes: 'gemes',
+              nyaman: 'bikin nyaman',
+              seneng: 'bikin seneng',
+              lucu: 'lucu'
+            };
+            
+            const choicesList = selectedChoices.map(choice => choiceTexts[choice]).join(', ');
+            const timeData = calculateTimeTogether();
+            
+            const personalMsgEl = document.getElementById('personalMessage');
+            const countdownEl = document.getElementById('countdown');
+            
+            if (personalMsgEl && countdownEl) {
+              personalMsgEl.innerHTML =
+                `<strong>${timeMessage}Dan menurutmu Rey itu ${choicesList}! Aww~ 🥰</strong><br><br>` +
+                `Hehe, ternyata waktu itu diajak ke: "<em>${freeAnswer}</em>" ya~ 😊<br>` +
+                `Pasti seru banget tuh! ✨<br><br>` +
+                `<strong>Nyaman-nyaman terus ya sama aku! 💕</strong>`;
+              
+              countdownEl.innerHTML =
+                `${timeData.months} bulan, ${timeData.days} hari<br>` +
+                `<small style="font-size: 16px;">(Total: ${timeData.totalDays} hari, ${timeData.hours} jam, ${timeData.minutes} menit)</small>`;
+            }
+            
+            this.style.transform = "scale(0.95)";
+            setTimeout(() => { this.style.transform = "scale(1)"; }, 150);
+            setTimeout(() => {
+              document.getElementById("question3").style.display = "none";
+              document.getElementById("responseMessage").style.display = "block";
+            }, 300);
+          } catch (error) {
+            console.error("Error processing answer:", error);
+            alert("Oops, ada error. Coba refresh halaman ya!");
+          }
+        });
+      } else {
+        console.error("Submit answer button not found!"); // Error checking
+      }
+
+      // Handle continue ke surprise
+      const continueBtnEl = document.getElementById('continueBtn');
+      if (continueBtnEl) {
+        continueBtnEl.addEventListener('click', function() {
+          // Play celebration sound
+          if (window.audioSystem) {
+            audioSystem.playCelebrationSound();
+          }
+          
           window.location.href = "surprise.html";
         });
-    </script>
-  </body>
+      } else {
+        console.error("Continue button not found!"); // Error checking
+      }
+    });
+    
+    // Add simple indicator that JS loaded
+    console.log("Script loaded");
+    document.body.style.opacity = "1";
+  </script>
+</body>
 </html>

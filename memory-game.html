@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main Game dulu ya Neng</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="audio-system.js"></script>
+    <style>
+      .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 350px;
+        margin: 20px auto;
+      }
+      
+      .memory-card {
+        aspect-ratio: 1;
+        background: linear-gradient(45deg, #ff69b4, #ff1493);
+        border: none;
+        border-radius: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+      
+      .memory-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      }
+      
+      .memory-card.flipped {
+        background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+        color: #333;
+      }
+      
+      .memory-card.matched {
+        background: linear-gradient(45deg, #98fb98, #90ee90);
+        color: #2e7d32;
+      }
+      
+      .game-stats {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 18px;
+        color: #ff69b4;
+      }
+      
+      .win-message {
+        display: none;
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+        border-radius: 15px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="celebration">
+        <span class="balloon">🧠</span>
+        <span class="balloon">🎮</span>
+        <span class="balloon">💕</span>
+      </div>
+
+      <h1>Main Game dulu ya Neng <span class="heart-animation">🎯</span></h1>
+
+      <p style="text-align: center;">
+        <strong>Ayo main game cocok-cocokan! Temukan pasangan emoji yang sama ya Rimaa~ 💖</strong>
+      </p>
+
+      <div class="game-stats">
+        <div>Langkah: <span id="moves">0</span></div>
+        <div>Waktu: <span id="timer">00:00</span></div>
+      </div>
+
+      <div class="memory-grid" id="gameGrid">
+        <!-- Cards akan di-generate oleh JavaScript -->
+      </div>
+
+      <div class="win-message" id="winMessage">
+        <div class="celebration">
+          <span class="balloon">🎉</span>
+          <span class="balloon">👏</span>
+          <span class="balloon">✨</span>
+        </div>
+        <h2>Woohoo! Neng hebat banget! 🎉</h2>
+        <p id="finalStats"></p>
+        <p><em>Kamu emang jago! Sekarang lanjut ke kejutan berikutnya yuk~ 💕</em></p>
+        <button onclick="window.location.href='questions.html'" style="margin: 10px; padding: 12px 24px; background: linear-gradient(45deg, #ff69b4, #ff1493); color: white; border: none; border-radius: 20px; font-size: 16px; cursor: pointer;">
+          🎁 Lanjut ke Tanya Jawab
+        </button>
+        <button onclick="resetGame()" style="margin: 10px; padding: 12px 24px; background: linear-gradient(45deg, #32cd32, #228b22); color: white; border: none; border-radius: 20px; font-size: 16px; cursor: pointer;">
+          🔄 Main Lagi
+        </button>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <button onclick="window.location.href='index.html'" style="padding: 12px 24px; background: linear-gradient(45deg, #ffa500, #ff8c00); color: white; border: none; border-radius: 20px; font-size: 16px; cursor: pointer;">
+          🏠 Kembali ke Beranda
+        </button>
+      </div>
+    </div>
+
+    <footer class="footer-credit">
+      Website by Rey
+    </footer>
+
+    <script>
+      const emojis = ['💖', '🌹', '🎉']; // 3 emoji untuk 2x3 grid (3 pairs)
+      let cards = [...emojis, ...emojis]; // 3 pairs = 6 cards
+      let flippedCards = [];
+      let matchedPairs = 0;
+      let moves = 0;
+      let startTime = null;
+      let timerInterval = null;
+
+      // Shuffle array
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      // Initialize game
+      function initGame() {
+        const grid = document.getElementById('gameGrid');
+        grid.innerHTML = '';
+        cards = shuffle([...emojis, ...emojis]); // 3 pairs
+        
+        cards.forEach((emoji, index) => {
+          const card = document.createElement('button');
+          card.className = 'memory-card';
+          card.textContent = '💗';
+          card.dataset.emoji = emoji;
+          card.dataset.index = index;
+          card.onclick = () => flipCard(card);
+          grid.appendChild(card);
+        });
+      }
+
+      // Flip card
+      function flipCard(card) {
+        if (flippedCards.length === 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+          return;
+        }
+
+        if (!startTime) {
+          startTime = Date.now();
+          timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // Play click sound
+        if (window.audioSystem) {
+          audioSystem.playClickSound();
+        }
+
+        card.classList.add('flipped');
+        card.textContent = card.dataset.emoji;
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+          moves++;
+          document.getElementById('moves').textContent = moves;
+          
+          setTimeout(() => {
+            checkMatch();
+          }, 600);
+        }
+      }
+
+      // Check if cards match
+      function checkMatch() {
+        const [card1, card2] = flippedCards;
+        
+        if (card1.dataset.emoji === card2.dataset.emoji) {
+          card1.classList.add('matched');
+          card2.classList.add('matched');
+          matchedPairs++;
+          
+          // Play success sound
+          if (window.audioSystem) {
+            audioSystem.playSuccessSound();
+          }
+          
+          if (matchedPairs === 3) { // 3 pairs untuk game 2x3
+            setTimeout(showWinMessage, 500);
+          }
+        } else {
+          card1.classList.remove('flipped');
+          card2.classList.remove('flipped');
+          card1.textContent = '💗';
+          card2.textContent = '💗';
+          
+          // Play wrong sound
+          if (window.audioSystem) {
+            audioSystem.playWrongSound();
+          }
+        }
+        
+        flippedCards = [];
+      }
+
+      // Update timer
+      function updateTimer() {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        document.getElementById('timer').textContent = 
+          `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+
+      // Show win message
+      function showWinMessage() {
+        clearInterval(timerInterval);
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        
+        // Play celebration sound
+        if (window.audioSystem) {
+          audioSystem.playCelebrationSound();
+        }
+        
+        document.getElementById('finalStats').textContent = 
+          `Selesai dalam ${moves} langkah dan ${minutes}:${seconds.toString().padStart(2, '0')}! 🏆`;
+        document.getElementById('winMessage').style.display = 'block';
+      }
+
+      // Reset game
+      function resetGame() {
+        matchedPairs = 0;
+        moves = 0;
+        flippedCards = [];
+        startTime = null;
+        clearInterval(timerInterval);
+        document.getElementById('moves').textContent = '0';
+        document.getElementById('timer').textContent = '00:00';
+        document.getElementById('winMessage').style.display = 'none';
+        initGame();
+      }
+
+      // Start game when page loads
+      initGame();
+    </script>
+  </body>
+</html>

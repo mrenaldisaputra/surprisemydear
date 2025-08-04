@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kejutan Spesial!</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="audio-system.js"></script>
   </head>
   <body>
     <div class="container">
@@ -16,11 +17,6 @@
 
       <h1>Kejutan Spesial! <span class="heart-animation">💕</span></h1>
 
-      <img
-        src="https://via.placeholder.com/300x200/ff69b4/ffffff?text=Happy+Birthday+❤️"
-        alt="Happy Birthday"
-      />
-
       <p>Hari yang sangat istimewa ini, aku ingin bertanya...</p>
       <p>
         <strong
@@ -29,8 +25,44 @@
         >
       </p>
 
-      <button id="youBtn">Kamu ❤️</button>
+      <button id="youBtn">Rey ❤️</button>
       <button id="noBtn">Nggak mau bilang 😊</button>
+    </div>
+
+    <!-- Modal untuk Slider Kasih Sayang -->
+    <div id="loveSliderModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>
+          Seberapa sayang kamu sama Rey? 
+          <span class="heart-animation">💕</span>
+        </h2>
+
+        <div class="celebration">
+          <span class="balloon">💖</span>
+          <span class="balloon">💝</span>
+          <span class="balloon">💗</span>
+        </div>
+
+        <p style="text-align: center; margin: 20px 0;">
+          Geser slider di bawah ini untuk menunjukkan seberapa sayang kamu! 
+          <span class="heart-animation">😊</span>
+        </p>
+
+        <div class="love-slider-container" style="margin: 30px 0;">
+          <div class="slider-labels" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="font-size: 12px; color: #ff69b4;">😐 Kurang sayang</span>
+            <span style="font-size: 12px; color: #ff1493; font-weight: bold;">💕 Sayang banget!</span>
+          </div>
+          <input type="range" id="loveSlider" min="1" max="100" value="50" 
+                 style="width: 100%; height: 8px; border-radius: 5px; background: linear-gradient(to right, #ffb6c1, #ff69b4, #ff1493); outline: none; cursor: pointer;">
+          <div id="sliderValue" style="text-align: center; margin-top: 15px; font-size: 20px; font-weight: bold; color: #ff1493;">
+            50% sayang 💖
+          </div>
+        </div>
+
+        <button id="confirmLoveBtn" style="width: 100%; margin-top: 20px;">Konfirmasi Rasa Sayang 💕</button>
+      </div>
     </div>
 
     <!-- Modal untuk Response Pertama -->
@@ -61,73 +93,43 @@
     <div id="prayersModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Doa Terbaik Untukmu <span class="heart-animation">🙏</span></h2>
+        <h2>Selamat Ulang Tahun ke-23! <span class="heart-animation">🎉</span></h2>
+        <h2>Doa Spesial Buat Neng Rimaa <span class="heart-animation">🙏</span></h2>
 
-        <div class="prayer-text">
-          <p>
-            <strong
-              >🌟 Semoga Allah SWT memberikan umur yang berkah, rezeki yang
-              halal dan melimpah, serta kesehatan yang selalu terjaga.</strong
-            >
-          </p>
+        <div class="prayer-list">
+          <div class="prayer-text">
+            <p><strong>🌟 Rimaa, semoga hari-harimu selalu penuh warna dan kebahagiaan. Semoga rezekimu lancar, sehat terus, dan makin kece tiap hari!</strong></p>
+          </div>
+          <div class="prayer-text">
+            <p><strong>💖 Semoga selalu dikelilingi orang-orang yang sayang sama kamu, yang bikin kamu senyum tiap hari!</strong></p>
+          </div>
+          <div class="prayer-text">
+            <p><strong>🌈 Semoga semua impian dan harapanmu pelan-pelan jadi nyata. Harus tetap semangat, ya!</strong></p>
+          </div>
+          <div class="prayer-text">
+            <p><strong>✨ Semoga selalu dilindungi dari hal-hal yang nggak baik, dan dikasih yang terbaik sama Allah, dunia akhirat!</strong></p>
+          </div>
+          <div class="prayer-text">
+            <p><strong>🌸 Semoga Rimaa makin jadi versi terbaik dari diri sendiri, bikin keluarga bangga, dan selalu jadi inspirasi!</strong></p>
+          </div>
         </div>
 
-        <div class="prayer-text">
-          <p>
-            <strong
-              >💖 Semoga kamu selalu dikelilingi oleh orang-orang yang mencintai
-              dan menyayangimu dengan tulus.</strong
-            >
-          </p>
-        </div>
-
-        <div class="prayer-text">
-          <p>
-            <strong
-              >🌈 Semoga setiap langkahmu dimudahkan, setiap cita-citamu
-              tercapai, dan kebahagiaanmu tak pernah sirna.</strong
-            >
-          </p>
-        </div>
-
-        <div class="prayer-text">
-          <p>
-            <strong
-              >✨ Semoga Allah melindungimu dari segala hal buruk dan memberikan
-              yang terbaik di dunia dan akhirat.</strong
-            >
-          </p>
-        </div>
-
-        <div class="prayer-text">
-          <p>
-            <strong
-              >🌸 Semoga kamu selalu menjadi pribadi yang lebih baik dari hari
-              ke hari, dan menjadi kebanggaan keluarga.</strong
-            >
-          </p>
-        </div>
-
-        <div class="celebration">
+        <div class="celebration" style="margin: 20px 0; text-align: center;">
           <span class="balloon">🎂</span>
           <span class="balloon">🎈</span>
           <span class="balloon">🎊</span>
         </div>
 
-        <p>
-          <strong
-            >Selamat Ulang Tahun Sayang!
-            <span class="heart-animation">🎉💕</span></strong
-          >
+        <p style="text-align: center;">
+          <strong>Happy Birthday Rimaa! <span class="heart-animation">🎉💕</span></strong>
         </p>
-        <p>
-          <em
-            >Semoga hari ini dan hari-hari berikutnya selalu dipenuhi
-            kebahagiaan!</em
-          >
+        <p style="text-align: center;">
+          <em>Semoga hari ini super seru dan penuh kejutan manis! Jangan lupa senyum terus yaa~</em>
         </p>
 
-        <button id="backToHomeBtn">Kembali ke Beranda 🏠</button>
+        <div style="text-align: center; margin-top: 20px;">
+          <button id="backToHomeBtn">Kembali ke Beranda 🏠</button>
+        </div>
       </div>
     </div>
 
@@ -149,6 +151,7 @@
 
     <script>
       // Get modal elements
+      const loveSliderModal = document.getElementById("loveSliderModal");
       const loveModal = document.getElementById("loveModal");
       const prayersModal = document.getElementById("prayersModal");
       const shyModal = document.getElementById("shyModal");
@@ -156,56 +159,226 @@
       // Get button elements
       const youBtn = document.getElementById("youBtn");
       const noBtn = document.getElementById("noBtn");
+      const confirmLoveBtn = document.getElementById("confirmLoveBtn");
       const showPrayersBtn = document.getElementById("showPrayersBtn");
       const tryAgainBtn = document.getElementById("tryAgainBtn");
       const backToHomeBtn = document.getElementById("backToHomeBtn");
 
+      // Get slider elements
+      const loveSlider = document.getElementById("loveSlider");
+      const sliderValue = document.getElementById("sliderValue");
+
       // Get close elements
       const closeElements = document.querySelectorAll(".close");
 
-      // Event listeners
+      // Love level tracking
+      let loveLevel = 50;
+
+      // Function to show modal with improved centering
+      function showModal(modal) {
+        modal.classList.add('show');
+      }
+
+      function hideModal(modal) {
+        modal.classList.remove('show');
+      }
+
+      // Update slider display
+      function updateSliderDisplay(value) {
+        loveLevel = value;
+        let message = "";
+        let emoji = "";
+        let colorClass = "";
+        
+        if (value < 50) {
+          message = "Masih kurang banget nih! �";
+          emoji = "😐💔";
+          colorClass = "color: #ff4444;";
+        } else if (value < 70) {
+          message = "Lumayan, tapi masih bisa lebih! 😊";
+          emoji = "😊";
+          colorClass = "color: #ff8800;";
+        } else if (value < 85) {
+          message = "Udah bagus, tapi belum cukup! 💕";
+          emoji = "💕";
+          colorClass = "color: #ffaa00;";
+        } else if (value < 90) {
+          message = "Hampir sampai! Dikit lagi! �";
+          emoji = "�";
+          colorClass = "color: #ff6600;";
+        } else if (value < 95) {
+          message = "Nah gitu dong! Rey seneng! �";
+          emoji = "💕💖";
+          colorClass = "color: #ff1493;";
+        } else {
+          message = "PERFECT! SAYANG BANGET! 💕💖💗";
+          emoji = "💕💖💗✨";
+          colorClass = "color: #ff1493; text-shadow: 0 0 10px #ff69b4;";
+        }
+        
+        sliderValue.innerHTML = `
+          <div style="${colorClass} font-weight: bold;">
+            ${value}% sayang ${emoji}<br>
+            <small style="font-size: 14px;">${message}</small>
+          </div>
+        `;
+      }
+
+      // Slider event listener
+      if (loveSlider) {
+        loveSlider.addEventListener('input', function() {
+          updateSliderDisplay(this.value);
+          // Play heart sound for interaction
+          if (window.audioSystem) {
+            audioSystem.playHeartSound();
+          }
+        });
+      }
+
+      // Event listeners with sound effects
       youBtn.addEventListener("click", function () {
-        loveModal.style.display = "block";
+        if (window.audioSystem) {
+          audioSystem.startMusic();
+          audioSystem.playHeartSound();
+        }
+        showModal(loveSliderModal);
+      });
+
+      // Confirm love button
+      confirmLoveBtn.addEventListener("click", function () {
+        // Check if love level is sufficient
+        if (loveLevel < 90) {
+          if (window.audioSystem) {
+            audioSystem.playWrongSound();
+          }
+          
+          let encouragementMessage = "";
+          if (loveLevel < 50) {
+            encouragementMessage = `Hah? Cuma ${loveLevel}%? 😭\nMasa iya segitu doang sayang sama Rey? 💔`;
+          } else if (loveLevel < 70) {
+            encouragementMessage = `${loveLevel}% masih kurang nih! 🥺\nAyolah, Rey kan baik banget sama kamu💕`;
+          } else if (loveLevel < 80) {
+            encouragementMessage = `${loveLevel}% udah bagus sih, tapi masih kurang dikit! 😊\nCoba naikkin sampai lagi ya~ Rey pasti seneng banget! 💖`;
+          } else {
+            encouragementMessage = `${loveLevel}% udah deket banget! 😍\nTinggal dikit lagi! Ayolah, Rey sayang banget sama kamu loh~ 💕`;
+          }
+          
+          alert(encouragementMessage);
+          return; // Don't proceed if love level is too low
+        }
+        
+        // If love level is 90% or higher, proceed normally
+        if (window.audioSystem) {
+          audioSystem.playCelebrationSound();
+        }
+        
+        // Update love modal message based on slider value
+        const loveModalH2 = loveModal.querySelector('h2');
+        if (loveLevel <= 95) {
+          loveModalH2.innerHTML = `
+            Aku juga sayang banget sama kamu! 
+            <span class="heart-animation">💖💕</span><br>
+            <small style="font-size: 16px; color: #ff69b4;">Wahh ${loveLevel}%! Itu baru sayang yang beneran! 🥰</small>
+          `;
+        } else {
+          loveModalH2.innerHTML = `
+            Aku juga sayang banget banget sama kamu! 
+            <span class="heart-animation">💖💕💗💞</span><br>
+            <small style="font-size: 16px; color: #ff69b4;">OMG ${loveLevel}%! Kamu yang terbaik sedunia! 😍✨</small>
+          `;
+        }
+        
+        hideModal(loveSliderModal);
+        setTimeout(() => showModal(loveModal), 300);
       });
 
       noBtn.addEventListener("click", function () {
-        shyModal.style.display = "block";
+        if (window.audioSystem) {
+          audioSystem.startMusic();
+          audioSystem.playClickSound();
+        }
+        showModal(shyModal);
       });
 
       showPrayersBtn.addEventListener("click", function () {
-        loveModal.style.display = "none";
-        prayersModal.style.display = "block";
+        if (window.audioSystem) {
+          audioSystem.playCelebrationSound();
+          // Switch to celebration music for prayers modal
+          audioSystem.switchToCelebrationMusic();
+        }
+        hideModal(loveModal);
+        setTimeout(() => showModal(prayersModal), 300);
       });
 
       tryAgainBtn.addEventListener("click", function () {
-        shyModal.style.display = "none";
+        if (window.audioSystem) {
+          audioSystem.playClickSound();
+        }
+        hideModal(shyModal);
       });
 
       backToHomeBtn.addEventListener("click", function () {
+        if (window.audioSystem) {
+          audioSystem.playClickSound();
+          // Switch back to background music before navigating
+          audioSystem.switchToBackgroundMusic();
+        }
         window.location.href = "index.html";
       });
 
       // Close modal when clicking X
       closeElements.forEach((closeBtn) => {
         closeBtn.addEventListener("click", function () {
-          loveModal.style.display = "none";
-          prayersModal.style.display = "none";
-          shyModal.style.display = "none";
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+            // Switch back to background music if prayers modal is closed
+            if (prayersModal.classList.contains('show')) {
+              audioSystem.switchToBackgroundMusic();
+            }
+          }
+          hideModal(loveSliderModal);
+          hideModal(loveModal);
+          hideModal(prayersModal);
+          hideModal(shyModal);
         });
       });
 
       // Close modal when clicking outside
       window.addEventListener("click", function (event) {
+        if (event.target === loveSliderModal) {
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+          }
+          hideModal(loveSliderModal);
+        }
         if (event.target === loveModal) {
-          loveModal.style.display = "none";
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+          }
+          hideModal(loveModal);
         }
         if (event.target === prayersModal) {
-          prayersModal.style.display = "none";
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+            // Switch back to background music when prayers modal is closed
+            audioSystem.switchToBackgroundMusic();
+          }
+          hideModal(prayersModal);
         }
         if (event.target === shyModal) {
-          shyModal.style.display = "none";
+          if (window.audioSystem) {
+            audioSystem.playClickSound();
+          }
+          hideModal(shyModal);
         }
       });
+
+      // Initialize slider display
+      updateSliderDisplay(50);
     </script>
+
+    <footer class="footer-credit">
+      Website by Rey
+    </footer>
   </body>
 </html>
