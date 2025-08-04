@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kejutan!</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Kejutan!</h1>
+    <img src="https://via.placeholder.com/300x200?text=Love+You" alt="Gambar Cinta" />
+    <p>Kamu sayang sama siapa?</p>
+    <button id="youBtn">Kamu</button>
+    <button id="noBtn">Nggak mau bilang</button>
+  </div>
+
+  <script>
+    document.getElementById('youBtn').addEventListener('click', function () {
+      alert('Aku juga sayang banget sama kamu! 💖');
+    });
+    document.getElementById('noBtn').addEventListener('click', function () {
+      alert('Yakin? Yuk jawab yang jujur!');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pertanyaan Seru</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Pertanyaan Seru!</h1>
+
+    <div id="question1" class="question">
+      <p>Apa warna favoritmu?</p>
+      <button class="answer">Merah</button>
+      <button class="answer">Biru</button>
+      <button class="answer">Pink</button>
+    </div>
+
+    <div id="question2" class="question" style="display: none;">
+      <p>Kapan pertama kali kita bertemu?</p>
+      <button class="answer">Di kampus</button>
+      <button class="answer">Di kafe</button>
+      <button class="answer">Di taman</button>
+    </div>
+
+    <div id="finish" style="display: none;">
+      <p>Siap untuk kejutan?</p>
+      <button id="surpriseBtn">Lihat Kejutan</button>
+    </div>
+  </div>
+
+  <script>
+    const answers = document.querySelectorAll('.answer');
+    let step = 1;
+    answers.forEach(btn => btn.addEventListener('click', function () {
+      if (step === 1) {
+        document.getElementById('question1').style.display = 'none';
+        document.getElementById('question2').style.display = 'block';
+        step++;
+      } else if (step === 2) {
+        document.getElementById('question2').style.display = 'none';
+        document.getElementById('finish').style.display = 'block';
+      }
+    }));
+
+    document.getElementById('surpriseBtn').addEventListener('click', function () {
+      window.location.href = 'surprise.html';
+    });
+  </script>
+</body>
+</html>
