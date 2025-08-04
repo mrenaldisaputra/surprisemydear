@@ -1,6 +1,6 @@
 # Surprise My Dear
 
-Website sederhana untuk kejutan ulang tahun dengan pertanyaan interaktif dan halaman kejutan.
+Website sederhana untuk kejutan ulang tahun dengan pertanyaan interaktif dan halaman kejutan. Desain tampil bersih dengan nuansa pink dan responsif di perangkat mobile maupun desktop.
 
 ## Menjalankan
 
