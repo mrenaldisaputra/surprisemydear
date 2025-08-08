@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pertanyaan interaktif tentang hubungan - bagian dari kejutan ulang tahun" />
+  <meta name="author" content="Rey" />
   <title>Pertanyaan Seru</title>
   <script src="audio-system.js"></script>
   
@@ -148,15 +150,10 @@
   </footer>
 
   <script>
-    // Bungkus semua kode dalam DOMContentLoaded untuk memastikan halaman dimuat terlebih dahulu
     document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM fully loaded"); // Debugging line
-      
-      let step = 1;
       let selectedTime = '';
       let selectedChoices = [];
 
-      // Function untuk menghitung countdown dari 1 Februari 2025
       function calculateTimeTogether() {
         try {
           const startDate = new Date('2025-02-01');
@@ -175,20 +172,15 @@
             minutes: minutes
           };
         } catch (error) {
-          console.error("Error calculating time:", error);
           return { totalDays: 0, months: 0, days: 0, hours: 0, minutes: 0 };
         }
       }
 
       // Handle pertanyaan pertama
       const answerButtons = document.querySelectorAll('[data-answer]');
-      console.log("Answer buttons found:", answerButtons.length); // Debugging
       
       answerButtons.forEach((btn) => {
         btn.addEventListener('click', function() {
-          console.log("Button clicked:", this.getAttribute('data-answer')); // Debugging
-          
-          // Play click sound
           if (window.audioSystem) {
             audioSystem.playClickSound();
           }
@@ -205,14 +197,11 @@
 
       // Handle multiple choice buttons
       const multiButtons = document.querySelectorAll('.multi-choice');
-      console.log("Multi-choice buttons found:", multiButtons.length); // Debugging
       
       multiButtons.forEach((btn) => {
         btn.addEventListener('click', function() {
           const choice = this.getAttribute('data-choice');
-          console.log("Multi-choice clicked:", choice); // Debugging
           
-          // Play click sound
           if (window.audioSystem) {
             audioSystem.playClickSound();
           }
@@ -231,9 +220,6 @@
       const submitChoicesBtn = document.getElementById('submitChoices');
       if (submitChoicesBtn) {
         submitChoicesBtn.addEventListener('click', function() {
-          console.log("Submit choices clicked. Selected:", selectedChoices.length); // Debugging
-          
-          // Play click sound
           if (window.audioSystem) {
             audioSystem.playClickSound();
           }
@@ -258,8 +244,6 @@
             document.getElementById("question3").style.display = "block";
           }, 300);
         });
-      } else {
-        console.error("Submit choices button not found!"); // Error checking
       }
 
       // Handle pertanyaan ketiga (free text)
@@ -267,15 +251,10 @@
       if (submitAnswerBtn) {
         submitAnswerBtn.addEventListener('click', function() {
           const freeAnswerInput = document.getElementById('freeAnswer');
-          if (!freeAnswerInput) {
-            console.error("Free answer input not found!"); // Error checking
-            return;
-          }
+          if (!freeAnswerInput) return;
           
           const freeAnswer = freeAnswerInput.value.trim();
-          console.log("Submit answer clicked. Answer:", freeAnswer); // Debugging
           
-          // Play heart sound
           if (window.audioSystem) {
             audioSystem.playHeartSound();
           }
@@ -329,33 +308,23 @@
               document.getElementById("responseMessage").style.display = "block";
             }, 300);
           } catch (error) {
-            console.error("Error processing answer:", error);
             alert("Oops, ada error. Coba refresh halaman ya!");
           }
         });
-      } else {
-        console.error("Submit answer button not found!"); // Error checking
       }
 
       // Handle continue ke surprise
       const continueBtnEl = document.getElementById('continueBtn');
       if (continueBtnEl) {
         continueBtnEl.addEventListener('click', function() {
-          // Play celebration sound
           if (window.audioSystem) {
             audioSystem.playCelebrationSound();
           }
           
           window.location.href = "surprise.html";
         });
-      } else {
-        console.error("Continue button not found!"); // Error checking
       }
     });
-    
-    // Add simple indicator that JS loaded
-    console.log("Script loaded");
-    document.body.style.opacity = "1";
   </script>
 </body>
 </html>

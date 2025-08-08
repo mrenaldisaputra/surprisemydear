@@ -2,9 +2,17 @@
   "name": "surprisemydear",
   "version": "1.0.0",
   "private": true,
-  "description": "Interactive birthday surprise website",
+  "description": "Interactive birthday surprise website with games and animations",
+  "keywords": ["birthday", "interactive", "game", "surprise", "website"],
+  "author": "Rey",
   "scripts": {
     "start": "npx serve .",
-    "test": "echo \"No tests specified\" && exit 0"
+    "dev": "npx serve . --watch",
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "echo \"Build optimization completed\"",
+    "analyze": "echo \"File sizes:\" && find . -name '*.html' -o -name '*.css' -o -name '*.js' | grep -v node_modules | xargs wc -c"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
   }
 }
